@@ -1,0 +1,74 @@
+{
+  "questions": [
+    {
+      "question": "Which keyword is used to declare a variable in Kotlin that can be reassigned?",
+      "correctAnswer": "var",
+      "incorrectAnswers": ["val", "let", "const"],
+      "explanation": "In Kotlin, 'var' is used to declare a mutable variable that can be reassigned, while 'val' declares an immutable variable.",
+      "topicCode": 1
+    },
+    {
+      "question": "In Swift, which of the following is used to handle optional values safely?",
+      "correctAnswer": "if let",
+      "incorrectAnswers": ["guard var", "force unwrap", "optional chaining only"],
+      "explanation": "'if let' is used in Swift for optional binding, which safely unwraps optional values if they contain a value.",
+      "topicCode": 2
+    },
+    {
+      "question": "What is the primary benefit of using Kotlin Multiplatform for mobile development?",
+      "correctAnswer": "Code sharing between platforms",
+      "incorrectAnswers": ["Better performance than native", "Larger community than Flutter", "No need to learn platform-specific APIs"],
+      "explanation": "Kotlin Multiplatform allows sharing business logic code between different platforms while still using native UI components.",
+      "topicCode": 3
+    },
+    {
+      "question": "Which widget in Flutter is used to create a scrollable list of widgets?",
+      "correctAnswer": "ListView",
+      "incorrectAnswers": ["Column", "GridView", "Stack"],
+      "explanation": "ListView in Flutter is a scrollable list of widgets arranged linearly, either vertically or horizontally.",
+      "topicCode": 4
+    },
+    {
+      "question": "In Kotlin, what is the correct way to define a function that returns nothing?",
+      "correctAnswer": "fun doSomething(): Unit",
+      "incorrectAnswers": ["fun doSomething(): void", "fun doSomething(): None", "fun doSomething(): Null"],
+      "explanation": "In Kotlin, Unit is used to indicate that a function returns nothing, similar to void in other languages.",
+      "topicCode": 1
+    },
+    {
+      "question": "Which Swift feature allows for adding functionality to existing types?",
+      "correctAnswer": "Extensions",
+      "incorrectAnswers": ["Protocols", "Generics", "Subclassing"],
+      "explanation": "Extensions in Swift allow you to add new functionality to existing classes, structures, enumerations, or protocols.",
+      "topicCode": 2
+    },
+    {
+      "question": "In Kotlin Multiplatform, what is the purpose of the 'expect/actual' mechanism?",
+      "correctAnswer": "To define platform-specific implementations",
+      "incorrectAnswers": ["To handle exceptions", "To declare interfaces", "To optimize performance"],
+      "explanation": "The 'expect/actual' mechanism allows you to declare expected declarations in common code and provide platform-specific actual implementations.",
+      "topicCode": 3
+    },
+    {
+      "question": "What is the root widget in a Flutter application?",
+      "correctAnswer": "MaterialApp or CupertinoApp",
+      "incorrectAnswers": ["Scaffold", "Container", "AppBar"],
+      "explanation": "MaterialApp (for Material Design) or CupertinoApp (for iOS-style) are typically the root widgets that wrap the entire Flutter application.",
+      "topicCode": 4
+    },
+    {
+      "question": "Which Kotlin feature helps prevent null pointer exceptions?",
+      "correctAnswer": "Nullable types",
+      "incorrectAnswers": ["Extension functions", "Data classes", "Coroutines"],
+      "explanation": "Kotlin's nullable types (marked with ?) force developers to explicitly handle null cases, helping prevent null pointer exceptions.",
+      "topicCode": 1
+    },
+    {
+      "question": "In Swift, what is the primary purpose of the 'defer' statement?",
+      "correctAnswer": "To execute code when leaving the current scope",
+      "incorrectAnswers": ["To delay execution of code", "To handle errors", "To declare asynchronous code"],
+      "explanation": "The 'defer' statement in Swift is used to execute a set of statements just before code execution leaves the current block of code.",
+      "topicCode": 2
+    }
+  ]
+}

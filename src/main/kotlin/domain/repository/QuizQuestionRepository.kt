@@ -4,12 +4,12 @@ import org.aprikot.domain.model.QuizQuestion
 
 interface QuizQuestionRepository {
 
-    fun upsertQuestion(question: QuizQuestion)
+    suspend fun upsertQuestion(question: QuizQuestion)
 
-    fun getAllQuestions(topicCode: Int?, limit: Int?) : List<QuizQuestion>
+    suspend fun getAllQuestions(topicCode: Int?, limit: Int?) : List<QuizQuestion>
 
-    fun getQuestionById(id: String) : QuizQuestion?
+    suspend fun getQuestionById(id: String) : QuizQuestion?
 
-    fun deleteQuestionById(id: String) : Boolean
+    suspend fun deleteQuestionById(id: String) : Boolean
 
 }

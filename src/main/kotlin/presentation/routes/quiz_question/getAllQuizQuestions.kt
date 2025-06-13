@@ -21,7 +21,7 @@ fun Route.getAllQuizQuestions(
             )
         }else{
             call.respond(
-                message = "No QuizQuestions",
+                message = "No Quiz Questions",
                 status = HttpStatusCode.NotFound
             )
         }
