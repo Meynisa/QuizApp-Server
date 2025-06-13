@@ -12,4 +12,6 @@ interface QuizQuestionRepository {
 
     suspend fun deleteQuestionById(id: String) : Boolean
 
+    suspend fun upsertMultipleQuestions(listOfQuestions: List<QuizQuestion>)
+
 }

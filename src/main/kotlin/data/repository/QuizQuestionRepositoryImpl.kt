@@ -12,6 +12,7 @@ import org.aprikot.data.mapper.toQuizQuestionEntity
 import org.aprikot.data.utils.Constant.QUESTIONS_COLLECTION_NAME
 import org.aprikot.domain.model.QuizQuestion
 import org.aprikot.domain.repository.QuizQuestionRepository
+import java.util.Date
 
 class QuizQuestionRepositoryImpl(
     mongoDatabase: MongoDatabase
@@ -35,10 +36,25 @@ class QuizQuestionRepositoryImpl(
                     Updates.set(QuizQuestionEntity::incorrectAnswers.name, question.incorrectAnswers),
                     Updates.set(QuizQuestionEntity::explanation.name, question.explanation),
                     Updates.set(QuizQuestionEntity::topicCode.name, question.topicCode),
+                    Updates.set(QuizQuestionEntity::updatedAt.name, Date()),
                 )
                 questionCollection.updateOne(filterQuery, updateQuery)
             }
-        }catch (e: Exception){
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
+    }
+
+    override suspend fun upsertMultipleQuestions(listOfQuestions: List<QuizQuestion>){
+        try{
+            val listQuestionsEntity: List<QuizQuestionEntity> = listOfQuestions
+                .map { it.toQuizQuestionEntity() }
+                .toList()
+            questionCollection.insertMany(
+                listQuestionsEntity
+            )
+
+        } catch (e: Exception){
             e.printStackTrace()
         }
     }
@@ -48,7 +64,7 @@ class QuizQuestionRepositoryImpl(
         limit: Int?
     ): List<QuizQuestion> {
        return try {
-           val questionLimit = limit?.takeIf { it > 0 } ?: 10
+           val questionLimit = limit?.takeIf { it > 0 } ?: 20
            val filterQuery = topicCode?.let {
                Filters.eq(QuizQuestionEntity::topicCode.name, it)
            } ?: Filters.empty()

@@ -69,6 +69,77 @@
       "incorrectAnswers": ["To delay execution of code", "To handle errors", "To declare asynchronous code"],
       "explanation": "The 'defer' statement in Swift is used to execute a set of statements just before code execution leaves the current block of code.",
       "topicCode": 2
+    },
+
+    {
+      "question": "Which Flutter widget is used to create a material design button?",
+      "correctAnswer": "ElevatedButton",
+      "incorrectAnswers": ["FlatButton", "RaisedButton", "MaterialButton"],
+      "explanation": "ElevatedButton is the modern Flutter widget for material design buttons that appear elevated with a shadow.",
+      "topicCode": 4
+    },
+    {
+      "question": "In Kotlin, what is the primary purpose of data classes?",
+      "correctAnswer": "To hold data/state",
+      "incorrectAnswers": ["To implement business logic", "To handle UI components", "To manage database connections"],
+      "explanation": "Data classes in Kotlin are primarily used to hold data and automatically generate useful methods like toString(), equals(), and hashCode().",
+      "topicCode": 1
+    },
+    {
+      "question": "Which Swift keyword is used to define a constant that can't be changed?",
+      "correctAnswer": "let",
+      "incorrectAnswers": ["var", "const", "static"],
+      "explanation": "In Swift, 'let' declares a constant that cannot be changed after initialization, similar to 'val' in Kotlin.",
+      "topicCode": 2
+    },
+    {
+      "question": "What is the main advantage of using Kotlin Multiplatform over Flutter?",
+      "correctAnswer": "Native UI performance",
+      "incorrectAnswers": ["Faster development cycle", "Larger plugin ecosystem", "Easier to learn"],
+      "explanation": "Kotlin Multiplatform allows using native UI components on each platform, resulting in better performance and platform consistency compared to Flutter's widget-based approach.",
+      "topicCode": 3
+    },
+    {
+      "question": "Which Flutter command is used to add a package dependency?",
+      "correctAnswer": "flutter pub add",
+      "incorrectAnswers": ["flutter install package", "flutter dependency add", "flutter get package"],
+      "explanation": "The 'flutter pub add' command is used to add a package dependency to your Flutter project's pubspec.yaml file.",
+      "topicCode": 4
+    },
+    {
+      "question": "What Kotlin feature allows suspending and resuming execution without blocking threads?",
+      "correctAnswer": "Coroutines",
+      "incorrectAnswers": ["Extensions", "Delegates", "Sealed classes"],
+      "explanation": "Kotlin coroutines enable asynchronous programming by allowing suspension and resumption of execution without blocking threads.",
+      "topicCode": 1
+    },
+    {
+      "question": "In Swift, what is the purpose of the 'guard' statement?",
+      "correctAnswer": "Early exit if conditions aren't met",
+      "incorrectAnswers": ["Loop control", "Error throwing", "Memory management"],
+      "explanation": "The 'guard' statement provides early exit from a scope if certain conditions aren't met, helping to avoid nested if statements.",
+      "topicCode": 2
+    },
+    {
+      "question": "Which Kotlin Multiplatform feature allows sharing code between JVM and JavaScript?",
+      "correctAnswer": "Multiplatform projects",
+      "incorrectAnswers": ["Java interop", "Kotlin/JS", "Common module"],
+      "explanation": "Kotlin Multiplatform projects can target both JVM and JavaScript platforms from shared code in the common module.",
+      "topicCode": 3
+    },
+    {
+      "question": "What is the purpose of the 'BuildContext' in Flutter?",
+      "correctAnswer": "Handle widget location in the tree",
+      "incorrectAnswers": ["Manage state", "Handle animations", "Connect to native platform"],
+      "explanation": "BuildContext represents a widget's location in the widget tree and is used to access theme data, navigate, and find ancestor widgets.",
+      "topicCode": 4
+    },
+    {
+      "question": "Which Kotlin feature allows adding functions to existing classes without inheritance?",
+      "correctAnswer": "Extension functions",
+      "incorrectAnswers": ["Inline functions", "Higher-order functions", "Infix functions"],
+      "explanation": "Extension functions in Kotlin allow adding new functionality to existing classes without modifying their source code or using inheritance.",
+      "topicCode": 1
     }
   ]
 }

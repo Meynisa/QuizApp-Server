@@ -8,14 +8,14 @@ import io.ktor.server.routing.post
 import org.aprikot.domain.model.QuizQuestion
 import org.aprikot.domain.repository.QuizQuestionRepository
 
-fun Route.upsertQuizQuestions(
+fun Route.upsertMultipleQuestions(
     quizQuestionRepository: QuizQuestionRepository
 ){
-    post(path = "quiz/questions"){
-        val question = call.receive<QuizQuestion>()
-        quizQuestionRepository.upsertQuestion(question)
+    post(path = "quiz/multiple-questions"){
+        val listOfQuestions = call.receive<List<QuizQuestion>>()
+        quizQuestionRepository.upsertMultipleQuestions(listOfQuestions)
         call.respond(
-            message = "Question added successfully",
+            message = "${listOfQuestions.size} Questions added successfully",
             status = HttpStatusCode.Created
         )
     }
