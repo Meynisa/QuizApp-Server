@@ -1,17 +1,19 @@
 package org.aprikot.domain.repository
 
 import org.aprikot.domain.model.QuizQuestion
+import org.aprikot.domain.util.DataError
+import org.aprikot.domain.util.Result
 
 interface QuizQuestionRepository {
 
-    suspend fun upsertQuestion(question: QuizQuestion)
+    suspend fun getAllQuestions(topicCode: Int?, limit: Int?): Result<List<QuizQuestion>, DataError>
 
-    suspend fun getAllQuestions(topicCode: Int?, limit: Int?) : List<QuizQuestion>
+    suspend fun upsertQuestion(question: QuizQuestion): Result<Unit, DataError>
 
-    suspend fun getQuestionById(id: String) : QuizQuestion?
+    suspend fun getQuestionById(id: String?): Result<QuizQuestion, DataError>
 
-    suspend fun deleteQuestionById(id: String) : Boolean
+    suspend fun deleteQuestionById(id: String?): Result<Unit, DataError>
 
-    suspend fun upsertMultipleQuestions(listOfQuestions: List<QuizQuestion>)
+    suspend fun upsertMultipleQuestions(listOfQuestions: List<QuizQuestion>): Result<Unit, DataError>
 
 }

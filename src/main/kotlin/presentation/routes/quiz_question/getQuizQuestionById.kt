@@ -5,32 +5,26 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
 import org.aprikot.domain.repository.QuizQuestionRepository
+import org.aprikot.domain.util.onFailure
+import org.aprikot.domain.util.onSuccess
+import org.aprikot.presentation.util.respondWithError
 
 fun Route.getQuizQuestionById(
     quizQuestionRepository: QuizQuestionRepository
 ){
     get(path = "/quiz/questions/{questionId}"){
+
         val id = call.parameters["questionId"]
-        if (id.isNullOrBlank()){
-            call.respond(
-                message = "Question ID is needed",
-                status = HttpStatusCode.BadRequest
-            )
-            return@get
-        }
 
-        val question = quizQuestionRepository.getQuestionById(id)
-
-        if (question != null) {
-            call.respond(
-                message = question,
-                status = HttpStatusCode.OK
-            )
-        } else{
-            call.respond(
-                message = "No Quiz Question",
-                status = HttpStatusCode.NotFound
-            )
-        }
+        quizQuestionRepository.getQuestionById(id)
+            .onSuccess { question ->
+                call.respond(
+                    message = question,
+                    status = HttpStatusCode.OK
+                )
+            }
+            .onFailure { error ->
+                respondWithError(error)
+            }
     }
 }

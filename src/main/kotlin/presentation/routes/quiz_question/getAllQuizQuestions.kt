@@ -5,25 +5,28 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
 import org.aprikot.domain.repository.QuizQuestionRepository
+import org.aprikot.domain.util.DataError
+import org.aprikot.domain.util.onFailure
+import org.aprikot.domain.util.onSuccess
+import org.aprikot.presentation.util.respondWithError
 
 fun Route.getAllQuizQuestions(
     quizQuestionRepository: QuizQuestionRepository
 ){
     get(path = "/quiz/questions"){
+
         val topicCode = call.queryParameters["topicCode"]?.toIntOrNull()
         val limit = call.queryParameters["limit"]?.toIntOrNull()
 
-        val filteredQuestions = quizQuestionRepository.getAllQuestions(topicCode, limit)
-        if (filteredQuestions.isNotEmpty()){
-            call.respond(
-                message = filteredQuestions,
-                status = HttpStatusCode.OK
-            )
-        }else{
-            call.respond(
-                message = "No Quiz Questions",
-                status = HttpStatusCode.NotFound
-            )
-        }
+        quizQuestionRepository.getAllQuestions(topicCode, limit)
+            .onSuccess { questions ->
+                call.respond(
+                    message = questions,
+                    status = HttpStatusCode.OK
+                )
+            }
+            .onFailure { error ->
+                respondWithError(error)
+            }
     }
 }

@@ -5,27 +5,24 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.delete
 import org.aprikot.domain.repository.QuizQuestionRepository
+import org.aprikot.domain.util.DataError
+import org.aprikot.domain.util.onFailure
+import org.aprikot.domain.util.onSuccess
+import org.aprikot.presentation.util.respondWithError
 
 fun Route.deleteQuizQuestionById(
     quizQuestionRepository: QuizQuestionRepository
 ){
     delete(path = "/quiz/questions/{questionId}"){
+
         val id = call.parameters["questionId"]
-        if (id.isNullOrBlank()){
-            call.respond(
-                message = "Question ID is needed",
-                status = HttpStatusCode.BadRequest
-            )
-            return@delete
-        }
-        val isDeleted = quizQuestionRepository.deleteQuestionById(id)
-        if (isDeleted){
-            call.respond(HttpStatusCode.NoContent)
-        }else{
-            call.respond(
-                message = "No Question to delete",
-                status = HttpStatusCode.NotFound
-            )
-        }
+
+        quizQuestionRepository.deleteQuestionById(id)
+            .onSuccess {
+                call.respond(HttpStatusCode.NoContent)
+            }
+            .onFailure { error ->
+                respondWithError(error)
+            }
     }
 }
