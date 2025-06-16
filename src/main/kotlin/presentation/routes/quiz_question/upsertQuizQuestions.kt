@@ -4,7 +4,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
-import io.ktor.server.routing.post
+import io.ktor.server.resources.*
 import org.aprikot.domain.model.QuizQuestion
 import org.aprikot.domain.repository.QuizQuestionRepository
 import org.aprikot.domain.util.onFailure
@@ -14,8 +14,7 @@ import org.aprikot.presentation.util.respondWithError
 fun Route.upsertQuizQuestions(
     quizQuestionRepository: QuizQuestionRepository
 ){
-    post(path = "quiz/questions"){
-
+    post<QuizQuestionRoutesPath>{
         val question = call.receive<QuizQuestion>()
 
         quizQuestionRepository.upsertQuestion(question)
