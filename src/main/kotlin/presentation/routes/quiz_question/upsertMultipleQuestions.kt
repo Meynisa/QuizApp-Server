@@ -14,7 +14,7 @@ import io.ktor.server.resources.*
 fun Route.upsertMultipleQuestions(
     quizQuestionRepository: QuizQuestionRepository
 ){
-    post<QuizQuestionRoutesPath> {
+    post<QuizQuestionRoutesPath.Batch> {
 
         val listOfQuestions = call.receive<List<QuizQuestion>>()
 

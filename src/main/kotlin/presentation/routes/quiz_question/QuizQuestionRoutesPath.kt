@@ -13,4 +13,9 @@ class QuizQuestionRoutesPath(
         val parent: QuizQuestionRoutesPath = QuizQuestionRoutesPath(),
         val questionId: String
     )
+
+    @Resource(path = "/batch")
+    data class Batch(
+        val parent: QuizQuestionRoutesPath = QuizQuestionRoutesPath()
+    )
 }

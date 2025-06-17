@@ -140,6 +140,57 @@
       "incorrectAnswers": ["Inline functions", "Higher-order functions", "Infix functions"],
       "explanation": "Extension functions in Kotlin allow adding new functionality to existing classes without modifying their source code or using inheritance.",
       "topicCode": 1
+    },
+    {
+      "question": "Which concept exists in both Kotlin and Swift to safely handle operations that might return null?",
+      "correctAnswer": "Optional types",
+      "incorrectAnswers": ["Extension functions", "Coroutines", "Widget trees"],
+      "explanation": "Both Kotlin (nullable types with ?) and Swift (Optionals) have optional types to safely handle potentially null values, though their implementations differ.",
+      "topicCode": 5
+    },
+    {
+      "question": "When comparing Flutter's hot reload with Kotlin Multiplatform's development experience, what is a key difference?",
+      "correctAnswer": "Flutter's hot reload works with UI changes while KMP requires native rebuilds",
+      "incorrectAnswers": [
+        "KMP has faster hot reload than Flutter",
+        "Both technologies have identical hot reload capabilities",
+        "Only KMP supports state preservation during reload"
+      ],
+      "explanation": "Flutter's hot reload preserves app state and works for UI changes, while Kotlin Multiplatform's shared code changes require rebuilding the native UI components.",
+      "topicCode": 5
+    },
+    {
+      "question": "Which architecture pattern is commonly used across all four technologies (Kotlin, Swift, KMP, Flutter)?",
+      "correctAnswer": "MVVM (Model-View-ViewModel)",
+      "incorrectAnswers": [
+        "VIPER (View-Interactor-Presenter-Entity-Router)",
+        "RIBs (Router-Interactor-Builder)",
+        "Clean Architecture"
+      ],
+      "explanation": "MVVM is widely implemented across all platforms - with ViewModels in Android/KMP, ObservableObject in SwiftUI, and various state management solutions in Flutter.",
+      "topicCode": 5
+    },
+    {
+      "question": "What do Kotlin's 'expect/actual' and Flutter's 'Platform Channels' have in common?",
+      "correctAnswer": "Both are mechanisms to handle platform-specific code",
+      "incorrectAnswers": [
+        "Both are used for state management",
+        "Both are deprecated features",
+        "Both are exclusive to iOS development"
+      ],
+      "explanation": "Kotlin's expect/actual declares platform-specific implementations in shared code, while Flutter's Platform Channels allow communication with native code - both bridge platform differences.",
+      "topicCode": 5
+    },
+    {
+      "question": "Which concurrency model is shared between Kotlin (Coroutines), Swift (Async/Await), and Dart (Flutter)?",
+      "correctAnswer": "Structured concurrency",
+      "incorrectAnswers": [
+        "Actor model",
+        "Reactive streams",
+        "Thread pools"
+      ],
+      "explanation": "All three languages implement structured concurrency principles - Kotlin with coroutine scopes, Swift with task hierarchies, and Dart with async/await and Futures.",
+      "topicCode": 5
     }
   ]
 }
