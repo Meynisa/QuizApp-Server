@@ -4,7 +4,7 @@ import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId
 import java.util.Date
 
-data class QuizQuestionEntity(
+data class  QuizQuestionEntity(
     @BsonId
     val _id: String = ObjectId().toString(),
     val question: String,

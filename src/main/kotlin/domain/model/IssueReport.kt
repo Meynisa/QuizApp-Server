@@ -1,6 +1,8 @@
 package org.aprikot.domain.model
 
 import kotlinx.serialization.Serializable
+import org.aprikot.data.utils.DateSerializer
+import java.util.Date
 
 @Serializable
 data class IssueReport(
