@@ -6,10 +6,15 @@ import io.ktor.server.http.content.staticResources
 import io.ktor.server.resources.Resources
 import io.ktor.server.routing.routing
 import org.aprikot.data.database.DatabaseFactory
+import org.aprikot.data.repository.IssueReportRepositoryImpl
 import org.aprikot.data.repository.QuizQuestionRepositoryImpl
 import org.aprikot.data.repository.QuizTopicRepositoryImpl
+import org.aprikot.domain.repository.IssueReportRepository
 import org.aprikot.domain.repository.QuizQuestionRepository
 import org.aprikot.domain.repository.QuizTopicRepository
+import org.aprikot.presentation.routes.issue_report.deleteIssueReportById
+import org.aprikot.presentation.routes.issue_report.getAllIssueReports
+import org.aprikot.presentation.routes.issue_report.insertIssueReport
 import org.aprikot.presentation.routes.quiz_question.deleteQuizQuestionById
 import org.aprikot.presentation.routes.quiz_question.getAllQuizQuestions
 import org.aprikot.presentation.routes.quiz_question.getQuizQuestionById
@@ -29,6 +34,7 @@ fun Application.configureRouting() {
     val mongoDatabase = DatabaseFactory.create()
     val quizQuestionRepository: QuizQuestionRepository = QuizQuestionRepositoryImpl(mongoDatabase)
     val quizTopicRepository: QuizTopicRepository = QuizTopicRepositoryImpl(mongoDatabase)
+    val issueReportRepository: IssueReportRepository = IssueReportRepositoryImpl(mongoDatabase)
 
     routing {
 
@@ -47,6 +53,11 @@ fun Application.configureRouting() {
         upsertMultipleTopics(quizTopicRepository)
         deleteQuizTopicById(quizTopicRepository)
         getQuizTopicById(quizTopicRepository)
+
+        //Issue Report
+        getAllIssueReports(issueReportRepository)
+        insertIssueReport(issueReportRepository)
+        deleteIssueReportById(issueReportRepository)
 
         staticResources(
             remotePath = "/images",

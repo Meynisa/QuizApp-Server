@@ -11,5 +11,6 @@ data class IssueReportEntity(
     val issueType:String,
     val additionalComment: String?,
     val userEmail: String?,
-    val timestamp: String
+    val timestamp: String,
+    val createdAt: Date?,
 )

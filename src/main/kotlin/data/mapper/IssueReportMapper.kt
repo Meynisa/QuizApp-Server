@@ -12,7 +12,8 @@ fun IssueReportEntity.toIssueReport() = IssueReport(
     issueType = issueType,
     additionalComment = additionalComment,
     userEmail = userEmail,
-    timestamp = timestamp
+    timestamp = timestamp,
+    createdAt = createdAt,
 )
 
 fun IssueReport.toIssueReportEntity() = IssueReportEntity(
@@ -20,5 +21,6 @@ fun IssueReport.toIssueReportEntity() = IssueReportEntity(
     issueType = issueType,
     additionalComment = additionalComment,
     userEmail = userEmail,
-    timestamp = timestamp
+    timestamp = timestamp,
+    createdAt = Date(),
 )

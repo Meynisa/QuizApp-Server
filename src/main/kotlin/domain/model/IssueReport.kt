@@ -11,5 +11,7 @@ data class IssueReport(
     val issueType:String,
     val additionalComment: String?,
     val userEmail: String?,
-    val timestamp: String
+    val timestamp: String,
+    @Serializable(with = DateSerializer::class)
+    val createdAt: Date? = null,
 )
