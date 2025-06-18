@@ -1,6 +1,7 @@
-package org.aprikot
+package org.aprikot.presentation
 
 import io.ktor.server.application.*
+import io.ktor.server.netty.EngineMain
 import org.aprikot.presentation.config.configureKoin
 import org.aprikot.presentation.config.configureLogging
 import org.aprikot.presentation.config.configureRouting
@@ -10,7 +11,7 @@ import org.aprikot.presentation.config.configureValidation
 
 
 fun main(args: Array<String>) {
-    io.ktor.server.netty.EngineMain.main(args)
+    EngineMain.main(args)
 }
 
 @Suppress("unused")
