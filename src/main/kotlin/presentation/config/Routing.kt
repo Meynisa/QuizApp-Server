@@ -26,15 +26,15 @@ import org.aprikot.presentation.routes.quiz_topic.getQuizTopicById
 import org.aprikot.presentation.routes.quiz_topic.upsertMultipleTopics
 import org.aprikot.presentation.routes.quiz_topic.upsertQuizTopic
 import org.aprikot.presentation.routes.root
+import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {
 
     install(Resources)
 
-    val mongoDatabase = DatabaseFactory.create()
-    val quizQuestionRepository: QuizQuestionRepository = QuizQuestionRepositoryImpl(mongoDatabase)
-    val quizTopicRepository: QuizTopicRepository = QuizTopicRepositoryImpl(mongoDatabase)
-    val issueReportRepository: IssueReportRepository = IssueReportRepositoryImpl(mongoDatabase)
+    val quizQuestionRepository: QuizQuestionRepository by inject()
+    val quizTopicRepository: QuizTopicRepository by inject()
+    val issueReportRepository: IssueReportRepository by inject()
 
     routing {
 
