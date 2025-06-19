@@ -3,7 +3,6 @@ package org.aprikot.presentation.validator
 import io.ktor.server.plugins.requestvalidation.RequestValidationConfig
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 import org.aprikot.domain.model.IssueReport
-import org.aprikot.domain.model.QuizTopic
 
 fun RequestValidationConfig.validationIssueReport() {
     validate<IssueReport> { report ->

@@ -31,6 +31,9 @@ dependencies {
     implementation(libs.mongodb.driver.kotlin)
     implementation(libs.ktor.server.call.logging)
 
+    implementation(libs.ktor.server.auth)
+    implementation(libs.ktor.server.auth.jwt)
+
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 }

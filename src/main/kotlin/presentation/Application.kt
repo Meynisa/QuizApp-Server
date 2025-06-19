@@ -8,6 +8,7 @@ import org.aprikot.presentation.config.configureRouting
 import org.aprikot.presentation.config.configureSerialization
 import org.aprikot.presentation.config.configureStatusPages
 import org.aprikot.presentation.config.configureValidation
+import presentation.config.configureSecurity
 
 
 fun main(args: Array<String>) {
@@ -17,6 +18,8 @@ fun main(args: Array<String>) {
 @Suppress("unused")
 fun Application.module() {
     configureKoin()
+
+    configureSecurity()
     configureLogging()
     configureSerialization()
     configureRouting()

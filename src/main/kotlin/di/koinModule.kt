@@ -1,5 +1,7 @@
 package org.aprikot.di
 
+import data.repository.UserRepositoryImpl
+import domain.repository.UserRepository
 import org.aprikot.data.database.DatabaseFactory
 import org.aprikot.data.repository.IssueReportRepositoryImpl
 import org.aprikot.data.repository.QuizQuestionRepositoryImpl
@@ -17,5 +19,5 @@ val koinModule = module {
     singleOf(::QuizQuestionRepositoryImpl).bind<QuizQuestionRepository>()
     singleOf(::QuizTopicRepositoryImpl).bind<QuizTopicRepository>()
     singleOf(::IssueReportRepositoryImpl).bind<IssueReportRepository>()
-
+    singleOf(::UserRepositoryImpl).bind<UserRepository>()
 }

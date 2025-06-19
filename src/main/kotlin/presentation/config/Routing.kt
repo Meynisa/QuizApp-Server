@@ -1,14 +1,15 @@
 package org.aprikot.presentation.config
 
+import domain.model.User
+import domain.repository.UserRepository
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.http.content.staticResources
 import io.ktor.server.resources.Resources
 import io.ktor.server.routing.routing
-import org.aprikot.data.database.DatabaseFactory
-import org.aprikot.data.repository.IssueReportRepositoryImpl
-import org.aprikot.data.repository.QuizQuestionRepositoryImpl
-import org.aprikot.data.repository.QuizTopicRepositoryImpl
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.aprikot.domain.repository.IssueReportRepository
 import org.aprikot.domain.repository.QuizQuestionRepository
 import org.aprikot.domain.repository.QuizTopicRepository
@@ -27,7 +28,11 @@ import org.aprikot.presentation.routes.quiz_topic.upsertMultipleTopics
 import org.aprikot.presentation.routes.quiz_topic.upsertQuizTopic
 import org.aprikot.presentation.routes.root
 import org.koin.ktor.ext.inject
+import presentation.routes.user.getUserByUsername
+import presentation.routes.user.insertUser
+import java.util.Date
 
+@OptIn(DelicateCoroutinesApi::class)
 fun Application.configureRouting() {
 
     install(Resources)
@@ -35,6 +40,7 @@ fun Application.configureRouting() {
     val quizQuestionRepository: QuizQuestionRepository by inject()
     val quizTopicRepository: QuizTopicRepository by inject()
     val issueReportRepository: IssueReportRepository by inject()
+    val userRepository: UserRepository by inject()
 
     routing {
 
@@ -58,6 +64,20 @@ fun Application.configureRouting() {
         getAllIssueReports(issueReportRepository)
         insertIssueReport(issueReportRepository)
         deleteIssueReportById(issueReportRepository)
+
+        //User
+        getUserByUsername(userRepository)
+        insertUser(userRepository)
+
+//        GlobalScope.launch {
+//            val user = User(
+//                username = "test",
+//                password = "test-password",
+//                salt = "salt",
+//                createdAt = Date()
+//            )
+//            userRepository.insertUser(user)
+//        }
 
         staticResources(
             remotePath = "/images",
