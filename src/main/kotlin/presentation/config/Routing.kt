@@ -1,6 +1,5 @@
 package org.aprikot.presentation.config
 
-import domain.model.User
 import domain.repository.UserRepository
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -8,8 +7,6 @@ import io.ktor.server.http.content.staticResources
 import io.ktor.server.resources.Resources
 import io.ktor.server.routing.routing
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.aprikot.domain.repository.IssueReportRepository
 import org.aprikot.domain.repository.QuizQuestionRepository
 import org.aprikot.domain.repository.QuizTopicRepository
@@ -28,12 +25,18 @@ import org.aprikot.presentation.routes.quiz_topic.upsertMultipleTopics
 import org.aprikot.presentation.routes.quiz_topic.upsertQuizTopic
 import org.aprikot.presentation.routes.root
 import org.koin.ktor.ext.inject
-import presentation.routes.user.getUserByUsername
-import presentation.routes.user.insertUser
-import java.util.Date
+import presentation.routes.user.authenticateRoute
+import presentation.routes.user.getSecretInfoRoute
+import presentation.routes.user.loginRoute
+import presentation.routes.user.registerRoute
+import security.hashing.HashingRepository
+import security.token.TokenConfig
+import security.token.TokenRepository
 
 @OptIn(DelicateCoroutinesApi::class)
-fun Application.configureRouting() {
+fun Application.configureRouting(
+    tokenConfig: TokenConfig
+) {
 
     install(Resources)
 
@@ -41,6 +44,8 @@ fun Application.configureRouting() {
     val quizTopicRepository: QuizTopicRepository by inject()
     val issueReportRepository: IssueReportRepository by inject()
     val userRepository: UserRepository by inject()
+    val hashingRepository: HashingRepository by inject()
+    val tokenRepository: TokenRepository by inject()
 
     routing {
 
@@ -65,19 +70,11 @@ fun Application.configureRouting() {
         insertIssueReport(issueReportRepository)
         deleteIssueReportById(issueReportRepository)
 
-        //User
-        getUserByUsername(userRepository)
-        insertUser(userRepository)
-
-//        GlobalScope.launch {
-//            val user = User(
-//                username = "test",
-//                password = "test-password",
-//                salt = "salt",
-//                createdAt = Date()
-//            )
-//            userRepository.insertUser(user)
-//        }
+        //Auth
+        loginRoute(userRepository, hashingRepository, tokenRepository, tokenConfig)
+        registerRoute(hashingRepository, userRepository)
+        authenticateRoute()
+        getSecretInfoRoute()
 
         staticResources(
             remotePath = "/images",

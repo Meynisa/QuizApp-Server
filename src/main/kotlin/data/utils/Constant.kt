@@ -6,4 +6,5 @@ object Constant {
     const val TOPICS_COLLECTION_NAME = "quiz_topics"
     const val ISSUE_REPORTS_COLLECTION_NAME = "issue_reports"
     const val USERS_COLLECTION_NAME = "users"
+    const val CLAIM_NAME = "userId"
 }

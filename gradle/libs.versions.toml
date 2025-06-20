@@ -5,6 +5,7 @@ kotlin-version = "2.1.10"
 ktor-version = "3.0.3"
 logback-version = "1.4.14"
 mongo-version = "4.10.2"
+commons-codec-version="1.15"
 
 #koin-version = "3.5.6"
 #kotlin-version = "2.1.10"
@@ -30,6 +31,7 @@ kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version
 mongodb-driver-kotlin = { module = "org.mongodb:mongodb-driver-kotlin-coroutine", version.ref = "mongo-version"}
 ktor-server-auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor-version" }
 ktor-server-auth-jwt = { module = "io.ktor:ktor-server-auth-jwt", version.ref = "ktor-version" }
+commons-codec = { module = "commons-codec:commons-codec", version.ref = "commons-codec-version" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }

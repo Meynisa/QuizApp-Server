@@ -9,6 +9,7 @@ import org.aprikot.presentation.config.configureSerialization
 import org.aprikot.presentation.config.configureStatusPages
 import org.aprikot.presentation.config.configureValidation
 import presentation.config.configureSecurity
+import security.token.TokenUtils
 
 
 fun main(args: Array<String>) {
@@ -19,10 +20,10 @@ fun main(args: Array<String>) {
 fun Application.module() {
     configureKoin()
 
-    configureSecurity()
+    configureSecurity(TokenUtils.createConfig(environment))
     configureLogging()
     configureSerialization()
-    configureRouting()
+    configureRouting(TokenUtils.createConfig(environment))
     configureValidation()
     configureStatusPages()
 }

@@ -5,4 +5,5 @@ sealed interface DataError : Error {
     data object Database : DataError
     data object Validation : DataError
     data object Unknown : DataError
+    data object Conflict : DataError
 }
