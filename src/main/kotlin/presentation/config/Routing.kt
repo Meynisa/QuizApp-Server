@@ -1,14 +1,12 @@
 package org.aprikot.presentation.config
 
+import domain.repository.UserRepository
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.http.content.staticResources
 import io.ktor.server.resources.Resources
 import io.ktor.server.routing.routing
-import org.aprikot.data.database.DatabaseFactory
-import org.aprikot.data.repository.IssueReportRepositoryImpl
-import org.aprikot.data.repository.QuizQuestionRepositoryImpl
-import org.aprikot.data.repository.QuizTopicRepositoryImpl
+import kotlinx.coroutines.DelicateCoroutinesApi
 import org.aprikot.domain.repository.IssueReportRepository
 import org.aprikot.domain.repository.QuizQuestionRepository
 import org.aprikot.domain.repository.QuizTopicRepository
@@ -27,14 +25,27 @@ import org.aprikot.presentation.routes.quiz_topic.upsertMultipleTopics
 import org.aprikot.presentation.routes.quiz_topic.upsertQuizTopic
 import org.aprikot.presentation.routes.root
 import org.koin.ktor.ext.inject
+import presentation.routes.user.authenticateRoute
+import presentation.routes.user.getSecretInfoRoute
+import presentation.routes.user.loginRoute
+import presentation.routes.user.registerRoute
+import security.hashing.HashingRepository
+import security.token.TokenConfig
+import security.token.TokenRepository
 
-fun Application.configureRouting() {
+@OptIn(DelicateCoroutinesApi::class)
+fun Application.configureRouting(
+    tokenConfig: TokenConfig
+) {
 
     install(Resources)
 
     val quizQuestionRepository: QuizQuestionRepository by inject()
     val quizTopicRepository: QuizTopicRepository by inject()
     val issueReportRepository: IssueReportRepository by inject()
+    val userRepository: UserRepository by inject()
+    val hashingRepository: HashingRepository by inject()
+    val tokenRepository: TokenRepository by inject()
 
     routing {
 
@@ -58,6 +69,12 @@ fun Application.configureRouting() {
         getAllIssueReports(issueReportRepository)
         insertIssueReport(issueReportRepository)
         deleteIssueReportById(issueReportRepository)
+
+        //Auth
+        loginRoute(userRepository, hashingRepository, tokenRepository, tokenConfig)
+        registerRoute(hashingRepository, userRepository)
+        authenticateRoute()
+        getSecretInfoRoute()
 
         staticResources(
             remotePath = "/images",

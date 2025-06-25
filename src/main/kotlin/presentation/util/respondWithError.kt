@@ -33,5 +33,11 @@ suspend fun RoutingContext.respondWithError (
                 status = HttpStatusCode.BadRequest
             )
         }
+        DataError.Conflict -> {
+            call.respond(
+                message = "Incorrect input data",
+                status = HttpStatusCode.Conflict
+            )
+        }
     }
 }

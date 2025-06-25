@@ -1,6 +1,7 @@
 package org.aprikot.presentation.routes.quiz_topic
 
 import io.ktor.http.HttpStatusCode
+import io.ktor.server.auth.authenticate
 import io.ktor.server.resources.get
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
@@ -12,16 +13,18 @@ import org.aprikot.presentation.util.respondWithError
 fun Route.getQuizTopicById(
     quizTopicRepository: QuizTopicRepository
 ) {
-    get<QuizTopicRoutesPath.ById> { path ->
-        quizTopicRepository.getTopicById(path.topicId)
-            .onSuccess { question ->
-                call.respond(
-                    message = question,
-                    status = HttpStatusCode.OK
-                )
-            }
-            .onFailure { error ->
-                respondWithError(error)
-            }
+    authenticate {
+        get<QuizTopicRoutesPath.ById> { path ->
+            quizTopicRepository.getTopicById(path.topicId)
+                .onSuccess { question ->
+                    call.respond(
+                        message = question,
+                        status = HttpStatusCode.OK
+                    )
+                }
+                .onFailure { error ->
+                    respondWithError(error)
+                }
+        }
     }
 }
