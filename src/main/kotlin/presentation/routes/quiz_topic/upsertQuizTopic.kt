@@ -1,6 +1,7 @@
 package org.aprikot.presentation.routes.quiz_topic
 
 import io.ktor.http.HttpStatusCode
+import io.ktor.server.auth.authenticate
 import io.ktor.server.request.receive
 import io.ktor.server.resources.post
 import io.ktor.server.response.respond
@@ -14,18 +15,20 @@ import org.aprikot.presentation.util.respondWithError
 fun Route.upsertQuizTopic(
     quizTopicRepository: QuizTopicRepository
 ) {
-    post<QuizTopicRoutesPath>{
-        val topic = call.receive<QuizTopic>()
+    authenticate {
+        post<QuizTopicRoutesPath>{
+            val topic = call.receive<QuizTopic>()
 
-        quizTopicRepository.upsertTopic(topic)
-            .onSuccess {
-                call.respond(
-                    message = "Topic added successfully",
-                    status = HttpStatusCode.Created
-                )
-            }
-            .onFailure { error ->
-                respondWithError(error)
-            }
+            quizTopicRepository.upsertTopic(topic)
+                .onSuccess {
+                    call.respond(
+                        message = "Topic added successfully",
+                        status = HttpStatusCode.Created
+                    )
+                }
+                .onFailure { error ->
+                    respondWithError(error)
+                }
+        }
     }
 }
