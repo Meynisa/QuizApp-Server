@@ -1,5 +1,6 @@
 package org.aprikot.data.repository
 
+import com.mongodb.client.model.Aggregates
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Updates
 import com.mongodb.client.result.InsertManyResult
@@ -15,6 +16,7 @@ import org.aprikot.domain.model.QuizQuestion
 import org.aprikot.domain.repository.QuizQuestionRepository
 import org.aprikot.domain.util.DataError
 import org.aprikot.domain.util.Result
+import org.bson.conversions.Bson
 import java.util.Date
 
 class QuizQuestionRepositoryImpl(
@@ -104,6 +106,40 @@ class QuizQuestionRepositoryImpl(
            e.printStackTrace()
            Result.Failure(DataError.Database)
        }
+    }
+
+    override suspend fun getRandomQuestions(
+        topicCode: Int?,
+        limit: Int?
+    ): Result<List<QuizQuestion>, DataError> {
+        return try {
+            val questionLimit = limit?.takeIf { it > 0 } ?: 20
+            val filterQuery = Filters.eq(
+                QuizQuestionEntity::topicCode.name, topicCode
+            )
+
+            val matchStage = if (topicCode == null || topicCode == 0) {
+                emptyList<Bson>()
+            } else {
+                listOf(Aggregates.match(filterQuery))
+            }
+
+            val pipeline = matchStage + Aggregates.sample(questionLimit)
+
+            val questions = questionCollection
+                .aggregate(pipeline)
+                .map { it.toQuizQuestion() }
+                .toList()
+
+            if (questions.isNotEmpty()){
+                Result.Success(questions)
+            } else {
+                Result.Failure(DataError.NotFound)
+            }
+        } catch (e: Exception){
+            e.printStackTrace()
+            Result.Failure(DataError.Database)
+        }
     }
 
     override suspend fun getQuestionById(id: String?): Result<QuizQuestion, DataError> {

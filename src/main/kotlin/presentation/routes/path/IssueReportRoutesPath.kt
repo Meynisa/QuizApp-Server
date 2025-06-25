@@ -1,4 +1,4 @@
-package org.aprikot.presentation.routes.issue_report
+package presentation.routes.path
 
 import io.ktor.resources.Resource
 

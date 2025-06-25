@@ -1,4 +1,4 @@
-package org.aprikot.presentation.routes.quiz_topic
+package presentation.routes.path
 
 import io.ktor.resources.Resource
 

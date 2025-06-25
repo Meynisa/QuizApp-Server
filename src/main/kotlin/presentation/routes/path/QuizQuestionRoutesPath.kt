@@ -1,4 +1,4 @@
-package org.aprikot.presentation.routes.quiz_question
+package presentation.routes.path
 
 import io.ktor.resources.Resource
 
@@ -17,5 +17,12 @@ class QuizQuestionRoutesPath(
     @Resource(path = "/batch")
     data class Batch(
         val parent: QuizQuestionRoutesPath = QuizQuestionRoutesPath()
+    )
+
+    @Resource(path = "/random")
+    data class Random(
+        val parent: QuizQuestionRoutesPath = QuizQuestionRoutesPath(),
+        val topicCode: Int? = null,
+        val limit: Int? = null
     )
 }

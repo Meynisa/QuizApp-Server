@@ -8,6 +8,8 @@ interface QuizQuestionRepository {
 
     suspend fun getAllQuestions(topicCode: Int?, limit: Int?): Result<List<QuizQuestion>, DataError>
 
+    suspend fun getRandomQuestions(topicCode: Int?, limit: Int?): Result<List<QuizQuestion>, DataError>
+
     suspend fun upsertQuestion(question: QuizQuestion): Result<Unit, DataError>
 
     suspend fun getQuestionById(id: String?): Result<QuizQuestion, DataError>
